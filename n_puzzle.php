@@ -15,11 +15,35 @@ if (isFileEmpty($argv[1]) != 0) {
     delComms($fileArr);
     $arrData = parse($fileArr);
     print_r($arrData);
+    gridToStr($arrData, $GLOBALS["nbN"]);
     echo "nbN = " . $GLOBALS["nbN"] . "\n";
+    echo "retour de test : " . test($GLOBALS["nbN"]) . "\n";
+
 } else {
   echo "File is empty\n";
 }
 
+function ref($nbN) {
+    $tmpStr = "";
+    for($i = 1; $i < ($nbN * $nbN); $i++) {
+        $tmpStr .= $i;
+    }    
+    return $tmpStr;
+}
+
+function gridToStr($grid, $nbN) {
+    $tmpX = 0;
+    $tmpY = 0;
+    $tmpStr = "";
+    while ($tmpX < $nbN) {
+        $tmpStr .= $grid[$tmpX][$tmpY];
+        $tmpX++;
+    }
+    while ($tmpY < $nbN) {
+        $tmpStr .= $grid[$tmpX][$tmpY];
+        $tmpY++;
+    }
+}
 
 function isFileEmpty($arr) {
     clearstatcache();

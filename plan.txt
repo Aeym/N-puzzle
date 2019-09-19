@@ -1,0 +1,31 @@
+fonction de check et parsing;
+
+structure contenant :
+
+- array[N][N] grid pour stocker 
+- heuristic heuristic h
+- pointeur parent
+- string correspondante a la grid
+
+heuristic : 
+
+- manhattan
+- linear conflit + manhattan ?
+- pattern database
+
+
+open set :
+priority queue en liste chainee ou autre en fonction de heuristic h
+
+closed set :
+- comparer la string 
+array ( 
+    "key" => structure node
+)
+avec key = string
+
+
+algo A*.
+
+creer le goal state pour pouvoir comparer (pour comparer lorsque trouve h = 0)
+
