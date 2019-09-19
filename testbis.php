@@ -1,33 +1,55 @@
 <?php
 
-    $grid = test($argv[1]);
-    // print_r($grid);
-    printArr($grid);
+    $openSet = [];
+    $closedSet = [];
+    $goalGrid = [];
 
-    function printArr($arr) {
-        // foreach($arr as $valueArr) {
-        //     $x = 1;
-        //     $c = count($valueArr);
-        //     while ($x < $c) {
-        //         echo $valueArr[$x] . " ";
-        //         $x++;
-        //     }
-        //     echo "\n";
-        // }
+    goalGrid($argv[1]);
+    print_r($GLOBALS);
+    // printGrid($grid, $argv[1]);
+    // echo "\n";
+    // echo gridToStr($grid);
+    function printGrid($arr, $n) {
+        $len = strlen((string)($n * $n - 1));
         $y = 0;
         $c = count($arr);
+        $str = "";
         while ($y < $c) {
             $x = 0;
             while ($x < $c) {
-                echo $arr[$x][$y] . " ";
+                $tmplen = strlen($arr[$x][$y]);
+                $tmpStr = $arr[$x][$y] . " ";
+                while ($tmplen < $len) {
+                    $tmpStr .= " ";
+                    $tmplen++;
+                }
+                $str .= $tmpStr;
                 $x++;
             }
             $y++;
-            echo "\n";
+            $str .=  "\n";
         }
+        echo $str;
     }
 
-    function test($n) {
+
+    function gridToStr($grid) {
+        $c = count($grid);
+        $y = 0;
+        $tmp = "";
+        while ($y < $c) {
+            $x = 0;
+            while ($x < $c) {
+                $tmp .= $grid[$x][$y];
+                $x++;
+            }
+            $y++;
+        }
+        return $tmp;
+    }
+
+
+    function goalGrid($n) {
         $nbmax = $n * $n;
         echo "nbmax = " . $nbmax . "\n";
         $nb = 1;
@@ -49,6 +71,10 @@
             }
             $y--;
             $x--;
+            if ($nb == $nbmax) {
+                $ret[$x][$y] = 0;
+                break;
+            }
             while ($x >= (0 + $snail)) {
                 $ret[$x][$y] = $nb;
                 $x--;
@@ -67,11 +93,9 @@
             if ($nb == $nbmax) {
                 $ret[$x][$y] = 0;
             }
-            // $x++;
-            // $nb++;
-            // print_r($ret);
         }
-        return array_values($ret);
+        $GLOBALS["goalGrid"][gridToStr($ret)] = $ret;
+        // return $ret;
     }
 
 ?>
