@@ -1,73 +1,53 @@
 <?php
 
-$nbN = 0;
-
-if (!file_exists($argv[1])) {
-    echo "File doesn't exist\n";
-    return 1;
-}
-if (!preg_match("/.txt/", $argv[1])) {
-    echo "Wrong file extension\n";
-    return 1;
-}
-if (isFileEmpty($argv[1]) != 0) {
-    $fileArr = file($argv[1]);
-    delComms($fileArr);
-    $arrData = parse($fileArr);
-    print_r($arrData);
-    gridToStr($arrData, $GLOBALS["nbN"]);
-    echo "nbN = " . $GLOBALS["nbN"] . "\n";
-    echo "retour de test : " . test($GLOBALS["nbN"]) . "\n";
-
-} else {
-  echo "File is empty\n";
-}
-
-function ref($nbN) {
-    $tmpStr = "";
-    for($i = 1; $i < ($nbN * $nbN); $i++) {
-        $tmpStr .= $i;
-    }    
-    return $tmpStr;
-}
-
-function gridToStr($grid, $nbN) {
-    $tmpX = 0;
-    $tmpY = 0;
-    $tmpStr = "";
-    while ($tmpX < $nbN) {
-        $tmpStr .= $grid[$tmpX][$tmpY];
-        $tmpX++;
+    if (!file_exists($argv[1])) {
+        echo "File doesn't exist\n";
+        return 1;
     }
-    while ($tmpY < $nbN) {
-        $tmpStr .= $grid[$tmpX][$tmpY];
-        $tmpY++;
+    if (!preg_match("/.txt/", $argv[1])) {
+        echo "Wrong file extension\n";
+        return 1;
+    }
+    if (!isFileEmpty($argv[1])) {
+        if (!parse_file($argv[1])) {
+            ;
+        }
+        else {
+            echo "Parsing error\n";
+            return 1;
+        }
+    }
+    else {
+        echo "File is empty\n";
+        return 1;
+    }
+
+
+function parse_file($argv) {
+    $fileArr = file($argv);
+    delComms($fileArr);
+    $total = $fileArr[0];
+    unset($fileArr[0]);
+    $str = implode("", $fileArr);
+    $str = preg_replace('/\s+/', '', $str);
+    if ($total != strlen($str)) {
+        print("Number missing\n");
+        return 1;
+    }
+    else {
+        return 0;
     }
 }
 
 function isFileEmpty($arr) {
     clearstatcache();
     if(filesize($arr)) {
-        return 1;
+        return 0;
     }
-    return 0;
+    return 1;
 }
 
-function parse($arr) {
-  $tmpArr = array();
-
-  foreach ($arr as $value) {
-    $tmp = explode(' ', $value);
-    if (count($tmp) > 1) {
-      $tmpArr[] = $tmp;
-    } else {
-      $GLOBALS["nbN"] = $value;
-    }
-  }
-  return $tmpArr;
-}
-
-function delComms(& $arr) {
+function delComms(&$arr) {
     $i = 0;
     $nbElem = count($arr);
     while ($i < $nbElem) {
