@@ -43,8 +43,8 @@ function parse_file($argv) {
     unset($fileArr[0]);
     $fileArr = array_values($fileArr);
 
-    for ($i=0, $len=count($fileArr); $i<$len; $i++) {       
-        $coordinates[] = explode(" ", $fileArr[$i]);
+    for ($i=0, $len=count($fileArr); $i<$len; $i++) {   
+        $coordinates[] = preg_split('/\s/', $fileArr[$i], -1, PREG_SPLIT_NO_EMPTY);      
     }
     for ($i=0, $len=count($coordinates); $i<$len; $i++) {
         $n = 0;
