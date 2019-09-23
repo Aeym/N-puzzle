@@ -29,6 +29,7 @@ function parse_file($argv) {
     $fileArr = file($argv);
     delComms($fileArr);
     $total = $fileArr[0];
+    $total *= $total;
     unset($fileArr[0]);
     $fileArr = array_values($fileArr);
 
