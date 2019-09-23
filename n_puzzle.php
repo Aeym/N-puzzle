@@ -34,13 +34,12 @@ function parse_file($argv) {
     $fileArr = array_values($fileArr);
 
     for ($i=0, $len=count($fileArr); $i<$len; $i++) {   
-        $coordinates[] = explode(" ", $fileArr[$i]);       
+        $coordinates[] = preg_split('/\s/', $fileArr[$i], -1, PREG_SPLIT_NO_EMPTY);      
     }
     for ($i=0, $len=count($coordinates); $i<$len; $i++) {
         $n = 0;
         $j = count($coordinates[$i]);
-        $coordinates[] = preg_replace('/\s/', '', $coordinates[$i]);
-        while ($n < $j){       
+        while ($n < $j){
             $nbvalues++;
             $n++;
         }
