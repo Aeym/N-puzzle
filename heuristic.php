@@ -6,7 +6,7 @@
         while ($y < $GLOBALS["nbN"]) {
             $x = 0;
             while ($x < $GLOBALS["nbN"]) {
-                $tmp = findInGoal($grid[$x][$y]);
+                $tmp = findInGoal($grid[$y][$x]);
                 $total += manhattan($tmp['x'], $tmp['y'], $x, $y);
                 $x++;
             }
@@ -24,7 +24,7 @@
         while ($y < $GLOBALS["nbN"]) {
             $x = 0;
             while ($x < $GLOBALS["nbN"]) {
-                if ($GLOBALS["goal"][$x][$y] == $num) {
+                if ($GLOBALS["gridGoal"][$y][$x] == $num) {
                     return array("x" => $x, "y" => $y);
                 }
                 $x++;

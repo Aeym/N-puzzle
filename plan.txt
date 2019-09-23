@@ -1,4 +1,4 @@
-fonction de check et parsing;
+fonction de check et parsing; DONE
 
 structure contenant :
 
@@ -31,6 +31,6 @@ creer le goal state pour pouvoir comparer (pour comparer lorsque trouve h = 0)
 
 FONCTIONS :
 
-- heuristic manhattan
-- fonction qui trouve l'index du chiffre X dans le goal state et le actual state (pour envoi aux heuristics)
-- fonction qui cree les nodes enfants
+- heuristic manhattan DONE
+- fonction qui trouve l'index du chiffre X dans le goal state et le actual state (pour envoi aux heuristics) DONE
+- fonction qui cree les nodes enfants 
