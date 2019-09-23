@@ -9,11 +9,10 @@
         return 1;
     }
     if (!isFileEmpty($argv[1])) {
-        if (!parse_file($argv[1])) {
-            ;
+        if (($coordinates = parse_file($argv[1])) != 1) {
+            # ICI DEBUT DU PROGRAMME
         }
         else {
-            echo "Parsing error\n";
             return 1;
         }
     }
@@ -24,18 +23,32 @@
 
 
 function parse_file($argv) {
+    $i = 0;
+    $coordinates = [];
+    $nbvalues = 0;
     $fileArr = file($argv);
     delComms($fileArr);
     $total = $fileArr[0];
     unset($fileArr[0]);
-    $str = implode("", $fileArr);
-    $str = preg_replace('/\s+/', '', $str);
-    if ($total != strlen($str)) {
+    $fileArr = array_values($fileArr);
+
+    for ($i=0, $len=count($fileArr); $i<$len; $i++) {       
+        $coordinates[] = explode(" ", $fileArr[$i]);
+    }
+    for ($i=0, $len=count($coordinates); $i<$len; $i++) {
+        $n = 0;
+        $j = count($coordinates[$i]);
+        while ($n < $j){
+            $nbvalues++;
+            $n++;
+        }
+    }
+    if ($total != $nbvalues) {
         print("Number missing\n");
         return 1;
     }
     else {
-        return 0;
+        return $coordinates;
     }
 }
 
