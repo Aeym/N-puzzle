@@ -13,7 +13,10 @@
     }
     if (!isFileEmpty($argv[1])) {
         if (($coordinates = parse_file($argv[1])) != 1) {
-
+            print_r($coordinates);
+            printGrid($coordinates, $GLOBALS["nbN"]);
+            print_r($GLOBALS["goal"]);
+            printGrid($GLOBALS["goal"], $GLOBALS["nbN"]);
             echo "valeur de heuristic de manhattan : " . manhattan_state($coordinates) . "\n";
             # ICI DEBUT DU PROGRAMME
         }
@@ -36,6 +39,7 @@ function parse_file($argv) {
     $total = $fileArr[0];
     $GLOBALS["nbN"] = $total;
     goalgrid($GLOBALS["nbN"]);
+    $total *= $total;
     unset($fileArr[0]);
     $fileArr = array_values($fileArr);
 

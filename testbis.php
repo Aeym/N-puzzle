@@ -17,8 +17,8 @@
         while ($y < $c) {
             $x = 0;
             while ($x < $c) {
-                $tmplen = strlen($arr[$x][$y]);
-                $tmpStr = $arr[$x][$y] . " ";
+                $tmplen = strlen($arr[$y][$x]);
+                $tmpStr = $arr[$y][$x] . " ";
                 while ($tmplen < $len) {
                     $tmpStr .= " ";
                     $tmplen++;
@@ -58,25 +58,25 @@
         $y = 0;
         while ($nb < $nbmax) {
             while ($x < ($n - $snail)) {
-                $ret[$x][$y] = $nb;
+                $ret[$y][$x] = $nb;
                 $x++;
                 $nb++;
             }
             $x--;
             $y++;
             while ($y < ($n - $snail)) {
-                $ret[$x][$y] = $nb;
+                $ret[$y][$x] = $nb;
                 $y++;
                 $nb++;
             }
             $y--;
             $x--;
             if ($nb == $nbmax) {
-                $ret[$x][$y] = 0;
+                $ret[$y][$x] = 0;
                 break;
             }
             while ($x >= (0 + $snail)) {
-                $ret[$x][$y] = $nb;
+                $ret[$y][$x] = $nb;
                 $x--;
                 $nb++;
             }
@@ -84,17 +84,18 @@
             $y--;
             $snail++;
             while ($y >= (0 + $snail)) {
-                $ret[$x][$y] = $nb;
+                $ret[$y][$x] = $nb;
                 $y--;
                 $nb++;
             }
             $y++;
             $x++;
             if ($nb == $nbmax) {
-                $ret[$x][$y] = 0;
+                $ret[$y][$x] = 0;
             }
         }
-        $GLOBALS["goal"] = $ret;
+        $GLOBALS["strGoal"] = gridToStr($ret);
+        $GLOBALS["gridGoal"] = $ret;
         // return $ret;
     }
 
