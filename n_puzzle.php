@@ -1,5 +1,8 @@
 <?php
 
+    require_once("./testbis.php");
+    require_once("./heuristic.php");
+
     if (!file_exists($argv[1])) {
         echo "File doesn't exist\n";
         return 1;
@@ -10,6 +13,8 @@
     }
     if (!isFileEmpty($argv[1])) {
         if (($coordinates = parse_file($argv[1])) != 1) {
+
+            echo "valeur de heuristic de manhattan : " . manhattan_state($coordinates) . "\n";
             # ICI DEBUT DU PROGRAMME
         }
         else {
@@ -29,6 +34,8 @@ function parse_file($argv) {
     $fileArr = file($argv);
     delComms($fileArr);
     $total = $fileArr[0];
+    $GLOBALS["nbN"] = $total;
+    goalgrid($GLOBALS["nbN"]);
     unset($fileArr[0]);
     $fileArr = array_values($fileArr);
 

@@ -4,8 +4,8 @@
     $closedSet = [];
     $goalGrid = [];
 
-    goalGrid($argv[1]);
-    print_r($GLOBALS);
+    // goalGrid($argv[1]);
+    // print_r($GLOBALS);
     // printGrid($grid, $argv[1]);
     // echo "\n";
     // echo gridToStr($grid);
@@ -94,7 +94,7 @@
                 $ret[$x][$y] = 0;
             }
         }
-        $GLOBALS["goalGrid"][gridToStr($ret)] = $ret;
+        $GLOBALS["goal"] = $ret;
         // return $ret;
     }
 
