@@ -6,8 +6,10 @@
         while ($y < $GLOBALS["nbN"]) {
             $x = 0;
             while ($x < $GLOBALS["nbN"]) {
-                $tmp = findInGoal($grid[$y][$x]);
-                $total += manhattan($tmp['x'], $tmp['y'], $x, $y);
+                if ($grid[$y][$x] != 0) {
+                    $tmp = findInGoal($grid[$y][$x]);
+                    $total += manhattan($tmp['x'], $tmp['y'], $x, $y);
+                }
                 $x++;
             }
             $y++;

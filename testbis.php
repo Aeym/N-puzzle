@@ -40,7 +40,7 @@
         while ($y < $c) {
             $x = 0;
             while ($x < $c) {
-                $tmp .= $grid[$x][$y];
+                $tmp .= $grid[$y][$x];
                 $x++;
             }
             $y++;

@@ -2,6 +2,7 @@
 
     require_once("./testbis.php");
     require_once("./heuristic.php");
+    require_once("./algo.php");
 
     if (!file_exists($argv[1])) {
         echo "File doesn't exist\n";
@@ -13,12 +14,22 @@
     }
     if (!isFileEmpty($argv[1])) {
         if (($coordinates = parse_file($argv[1])) != 1) {
-            print_r($coordinates);
-            printGrid($coordinates, $GLOBALS["nbN"]);
-            print_r($GLOBALS["gridGoal"]);
-            printGrid($GLOBALS["gridGoal"], $GLOBALS["nbN"]);
-            echo "valeur de heuristic de manhattan : " . manhattan_state($coordinates) . "\n";
+            // print_r($coordinates);
+            // printGrid($coordinates, $GLOBALS["nbN"]);
+            echo "\n";
+            // print_r($GLOBALS["gridGoal"]);
+            // printGrid($GLOBALS["gridGoal"], $GLOBALS["nbN"]);
+            // echo "valeur de heuristic de manhattan : " . manhattan_state($coordinates) . "\n";
             # ICI DEBUT DU PROGRAMME
+            $start = createNode($coordinates, "start", 0, 'c');
+            algo($start);
+            // print_r($start);
+            // $children = createChildren($start);
+            // print_r($children);
+            // foreach($children as $child) {
+            //     printGrid($child["grid"], $GLOBALS["nbN"]);
+            //     echo "\n";
+            // }
         }
         else {
             return 1;
