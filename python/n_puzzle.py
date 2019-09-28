@@ -1,11 +1,12 @@
 from grid import get_grid, goal_grid, print_grid
+from heuristic import manhattan_state
 from errors import check_file
 
 def main():
     if check_file() == 0:
-        grid2 = get_grid()
-        grid = goal_grid(10)
-        print_grid(grid, 10)
+        coordinates = get_grid()
+        start = manhattan_state(coordinates, 3)
+        print(start)
         return 0
     else:
         return 1
