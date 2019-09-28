@@ -84,9 +84,10 @@
         $str = $process["parent"];
         $i = 0;
         while ($str != "start") {
-            printGrid($closedList[$str]["grid"], $GLOBALS["nbN"]);
+            // json_decode(gzdecode($openListBis[$tmpStr]), TRUE)["g"]
+            printGrid(json_decode(gzdecode($closedList[$str]), TRUE)["grid"], $GLOBALS["nbN"]);
             echo "\n";
-            $str = $closedList[$str]["parent"];
+            $str = json_decode(gzdecode($closedList[$str]), TRUE)["parent"];
             $i++;
         }
         echo "Number of moves required : " . $i . "\n";
@@ -107,17 +108,50 @@
         return $foundIt;
     }
 
+    class PQtest extends SplPriorityQueue 
+{ 
+    protected $serial = PHP_INT_MAX;
+
+    public function insert($value, $priority) {
+        parent::insert($value, array($priority, $this->serial--));
+    }
+
+    public function compare($priority1, $priority2) 
+    { 
+        if ($priority1 === $priority2) return 0; 
+        return $priority1 < $priority2 ? -1 : 1; 
+    } 
+} 
+
     function algo($startNode) {
-        $openList = new SplDoublyLinkedList();
-        $openList->push($startNode);
+        $openList = new PQtest();
+        $openList->setExtractFlags(SplPriorityQueue::EXTR_DATA);
+        $gridStr = gridToStr($startNode["grid"]);
+        // $openList->insert($gridStr, array(-1 * $startNode['f'], -1 * $startNode['h']));
+        $openList->insert($gridStr, -1 * $startNode['f']);
+        $openListBis[$gridStr] = gzencode(json_encode($startNode));
         $closedList = array();
+        // $GLOBALS["maxInt"] = 
 
         while (!$openList->isEmpty()) {
-            // print_r($openList) ;
-            // echo "nb elem in openList : " . $openList->count() . "\n";
-            $process = $openList->offsetGet(0);
+            // $openList->rewind();
+            // print_r($openList);
+            $c = $openList->count();
+            // echo "nb elem in openList : " . $c . "\n";
+            // if ($c % 10000 == 0) {
+            //     print_r(json_decode(gzdecode($openListBis[$openList->current()])));
+            //     sleep(5);
+            // }
+            // echo "nb elem in openListBis : " . count($openListBis) . "\n";
+            $str = $openList->extract();
+            $process = json_decode(gzdecode($openListBis[$str]), TRUE);
+            // print_r($process);
+            // break;
+            unset($openListBis[$str]);
             // print_r($process);
             if ($process["h"] == 0) {
+                // echo "la";
+                // break;
                 path($process, $closedList);
                 echo "complexity in time : " . count($closedList);
                 echo "\n";
@@ -125,10 +159,7 @@
                 echo "complexity in size : " . $tmp . "\n";
                 return;
             }
-            $openList->offsetUnset(0);
-            // print_r($openList) ;
-
-            $closedList[gridToStr($process["grid"])] = $process;
+            $closedList[$str] = gzencode(json_encode($process));
             $children = createChildren($process);
             // print_r($children);
             // echo "//////////////////////////////////////////////////////////\n";
@@ -136,33 +167,36 @@
                 $tmpStr = gridToStr($child["grid"]);
                 if (!array_key_exists($tmpStr, $closedList)) {
                             // break bug
-                    if (($index = checkInOpen($openList, $child)) == -1) {
+                    if (!array_key_exists($tmpStr, $openListBis)) {
                         // echo "ici\n";
-                        $openList->rewind();
-                        while ($openList->current()["f"] < $child["f"] && $openList->valid()) {
-                            // echo "/////////////////////////////////////////////////////\n";
-                            $openList->next();
-                        }
-                        // echo "KEY IS : " . $openList->key() . "\n";
-                        // while ($openList->current()["h"] < $child['h'] && $openList->current()["f"] == $child['f']) {
+                        // $openList->rewind();
+                        // while ($openList->current()["f"] <= $child["f"] && $openList->current()["h"] < $child['h'] && $openList->valid()) {
+                        //     // echo "la";
                         //     $openList->next();
                         // }
-                        $openList->add($openList->key(), $child);
-                        $openList->rewind();
+                        // $openList->insert($tmpStr, array(-1 * $child['f'], -1 * $child['h']));
+                        $openList->insert($tmpStr, -1 * $child['f']);
+                        $openListBis[$tmpStr] =  gzencode(json_encode($child));
                     } else {
-                        if ($child["g"] < $openList->offsetGet($index)["g"]) {
-                            // echo "child g = " . $child['g'] . "\n" . "current de g = " . $openList->offsetGet($index)["g"] . "\n";;
-                            $openList->offsetSet($index, $child);
-                            $openList->rewind();
+                        if ($child["g"] < json_decode(gzdecode($openListBis[$tmpStr]), TRUE)["g"]) {
+                            // echo "child g = " . $child['g'] . "\n" . "current de g = " . $openListBis[$tmpStr]["g"] . "\n";;
+                            $openListBis[$tmpStr] =  gzencode(json_encode($child));
                         }
                     }
                 }
             }
             unset($children);
-            $openList->rewind();
+            // $openList->rewind();
         }
         echo "Not possible to reach goal\n";
         return;
     }
+
+    // function idaAlgo($startNode) {
+    //     $threshold = manhattan_state($startNode["grid"]);
+    //     while (1) {
+
+    //     }
+    // }
 
 ?>

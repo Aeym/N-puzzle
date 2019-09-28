@@ -1,8 +1,10 @@
 <?php
+    ini_set('memory_limit', '2048M'); // or you could use 1G
+
 
     require_once("./testbis.php");
     require_once("./heuristic.php");
-    require_once("./algo.php");
+    require_once("./algobis.php");
 
     if (!file_exists($argv[1])) {
         echo "File doesn't exist\n";
@@ -21,7 +23,7 @@
             // printGrid($GLOBALS["gridGoal"], $GLOBALS["nbN"]);
             // echo "valeur de heuristic de manhattan : " . manhattan_state($coordinates) . "\n";
             # ICI DEBUT DU PROGRAMME
-            $start = createNode($coordinates, "start", 0, 'c');
+            $start = createNode($coordinates, "start", -1, 'c');
             algo($start);
             // print_r($start);
             // $children = createChildren($start);

@@ -15,17 +15,44 @@
 //     $obj->unshift(10);
 // }
 // // $obj->OffsetSet(2);
-// echo $obj->next();
-// echo $obj->next();
-// echo $obj->next();
-// echo $obj->next();
-// echo $obj->next();
+// // while ($obj->current()["f"] < $child["f"] && $obj->key() < $c) {
+// //     echo "la";
+// //     $obj->next();
+// // }
 
 // $obj->add(1, 8);
 
-// echo "<br>Our Linked List:";
-// echo $obj->offsetUnset(0);
+// // echo "<br>Our Linked List:";
+// // echo $obj->offsetUnset(0);
 // print_r($obj);
+
+// $obj->rewind();
+// // $c = $obj->count();
+// // echo "count = " . $c . "\n";
+// while ($obj->valid()) {
+//     echo "key = " . $obj->key() . "\n";
+//     if ($obj->current() == 3) {
+//         echo "find it\n";
+//         break;
+//     }
+//     $obj->next();
+// }
+
+$obj = new SplPriorityQueue();
+
+$obj->insert("salut", array(-4, -4));
+$obj->insert("poto", array(-4, -2));
+$obj->insert("comment", array(-4, -3));
+$obj->insert("va", array(-4, -1));
+print_r($obj);
+// print_r($obj);
+print_r($obj->current());
+print_r($obj);
+print_r($obj->extract());
+print_r($obj);
+print_r($obj->extract());
+print_r($obj);
+
 // $curr = $obj->current(); // this will return NULL as we have not set initial node.
 
 // echo "<br> Rewinding the position so that current node points to first node ";
@@ -40,8 +67,10 @@
 // echo "<br>Printing the next node:";
 // echo $obj->current();
 
-$tmp = array("salut" => 3, "test" => 50);
-print_r($tmp);
-unset($tmp["salut"]);
-print_r($tmp);
+// $tmp = array("salut" => 3, "test" => 50);
+// print_r($tmp);
+// unset($tmp["salut"]);
+// print_r($tmp);
+
+
 ?>
