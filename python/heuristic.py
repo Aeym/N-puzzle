@@ -1,8 +1,9 @@
 from grid import goal_grid
 
-def manhattan_state(grid, size):
+def manhattan_state(grid):
     y = 0
     total = 0
+    size = len(grid)
     for y in range(size):
         x = 0       
         for x in range(size):

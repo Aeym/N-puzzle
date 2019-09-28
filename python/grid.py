@@ -1,6 +1,33 @@
 import sys
 from errors import check_values
 
+def get_grid_size(grid):
+    size = len(grid)
+    return size
+
+
+def grid_to_str(grid):
+    c = len(grid)
+    y = 0
+    tmp = ''
+    for y in range(c):
+        x = 0
+        for x in range(c):
+            tmp += str(grid[y][x])
+    return tmp
+
+def find_zero(grid):
+    y = 0
+    tmp = [0, 0]
+    for y in range(len(grid)):
+        x = 0
+        for x in range(len(grid)):
+            if grid[y][x] == 0:
+                tmp[0] = x
+                tmp[1] = y
+                return tmp
+    return 0
+
 def print_grid(grid, size):
     y = 0
     length = len(str(size * size - 1))
