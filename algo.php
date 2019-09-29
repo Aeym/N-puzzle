@@ -151,9 +151,24 @@
                         $openList->rewind();
                     } else {
                         if ($child["g"] < $openList->offsetGet($index)["g"]) {
-                            // echo "child g = " . $child['g'] . "\n" . "current de g = " . $openList->offsetGet($index)["g"] . "\n";;
-                            $openList->offsetSet($index, $child);
+                            print_r($openList);
+                            printGrid($child["grid"], $GLOBALS["nbN"]);
+                            echo "index = " . $index . "\n";
+                            $openList->offsetUnset($index);
                             $openList->rewind();
+                            // echo "child g = " . $child['g'] . "\n" . "current de g = " . $openList->offsetGet($index)["g"] . "\n";;
+                            while ($openList->current()["f"] < $child["f"] && $openList->valid()) {
+                                // echo "/////////////////////////////////////////////////////\n";
+                                $openList->next();
+                            }
+                            echo "KEY IS : " . $openList->key() . "\n";
+                            // while ($openList->current()["h"] < $child['h'] && $openList->current()["f"] == $child['f']) {
+                            //     $openList->next();
+                            // }
+                            $openList->add($openList->key(), $child);
+                            $openList->rewind();
+                            print_r($openList);
+                            sleep(100);
                         }
                     }
                 }
@@ -164,5 +179,9 @@
         echo "Not possible to reach goal\n";
         return;
     }
-
+    4  2  3  10
+    1  13 14 6
+    8  11 12 5
+    7  9  0  15
+    
 ?>

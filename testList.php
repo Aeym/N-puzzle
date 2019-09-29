@@ -4,21 +4,21 @@
 * Examples of DoublyLinkedList
 // */
 
-// $obj = new SplDoublyLinkedList();
-// // Check wither linked list is empty
-// if ($obj->isEmpty())
-// {
-//     echo "Adding nodes to Linked List<br>";
-//     $obj->push(2);
-//     $obj->push(3);
-//     echo "Adding the node at beginning of doubly linked list <br>";
-//     $obj->unshift(10);
-// }
-// // $obj->OffsetSet(2);
-// // while ($obj->current()["f"] < $child["f"] && $obj->key() < $c) {
-// //     echo "la";
-// //     $obj->next();
-// // }
+$obj = new SplDoublyLinkedList();
+// Check wither linked list is empty
+if ($obj->isEmpty())
+{
+    echo "Adding nodes to Linked List<br>";
+    $obj->push(2);
+    $obj->push(3);
+    echo "Adding the node at beginning of doubly linked list <br>";
+    $obj->unshift(10);
+}
+$obj->OffsetSet(2);
+while ($obj->current()["f"] < $child["f"] && $obj->key() < $c) {
+    echo "la";
+    $obj->next();
+}
 
 // $obj->add(1, 8);
 
@@ -38,20 +38,25 @@
 //     $obj->next();
 // }
 
-$obj = new SplPriorityQueue();
+// $obj = new SplPriorityQueue();
 
-$obj->insert("salut", array(-4, -4));
-$obj->insert("poto", array(-4, -2));
-$obj->insert("comment", array(-4, -3));
-$obj->insert("va", array(-4, -1));
-print_r($obj);
+// $obj->insert("salut", 1);
+// $obj->insert("poto", 2);
+// $obj->insert("comment", 3);
+// $obj->insert("va", 4);
 // print_r($obj);
-print_r($obj->current());
-print_r($obj);
-print_r($obj->extract());
-print_r($obj);
-print_r($obj->extract());
-print_r($obj);
+// echo $obj->current() . "\n";
+// echo $obj->current() . "\n";
+// $obj->next();
+// echo $obj->current() . "\n";
+// echo $obj->current() . "\n";
+// // echo $obj->key() . "\n";
+// // print_r($obj);
+// print_r($obj); 
+// print_r($obj->extract());
+// print_r($obj);
+// print_r($obj->extract());
+// print_r($obj);
 
 // $curr = $obj->current(); // this will return NULL as we have not set initial node.
 

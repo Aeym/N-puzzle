@@ -1,5 +1,5 @@
 <?php
-    ini_set('memory_limit', '2048M'); // or you could use 1G
+    // ini_set('memory_limit', '2048M'); // or you could use 1G
 
 
     require_once("./testbis.php");
@@ -24,6 +24,7 @@
             // echo "valeur de heuristic de manhattan : " . manhattan_state($coordinates) . "\n";
             # ICI DEBUT DU PROGRAMME
             $start = createNode($coordinates, "start", -1, 'c');
+            //  echo gridToStr($start["grid"]) . "\n";
             algo($start);
             // print_r($start);
             // $children = createChildren($start);
@@ -32,6 +33,7 @@
             //     printGrid($child["grid"], $GLOBALS["nbN"]);
             //     echo "\n";
             // }
+            // print_r($start);
         }
         else {
             return 1;
