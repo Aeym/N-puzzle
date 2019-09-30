@@ -8,13 +8,17 @@
             while ($x < $GLOBALS["nbN"]) {
                 if ($grid[$y][$x] != 0) {
                     $tmp = findInGoal($grid[$y][$x]);
-                   #  print_r($grid);
                     if ($GLOBALS["chose"] == 1){ 
                         $total += manhattan($tmp['x'], $tmp['y'], $x, $y);
                     }
                     if ($GLOBALS["chose"] == 2) {
                         $total += euclidean($tmp['x'], $tmp['y'], $x, $y);
-                    }  
+                    }
+                    if ($GLOBALS["chose"] == 3) {
+                        if ($grid[$y][$x] != $GLOBALS["gridGoal"][$y][$x]) {
+                            $total += 1;
+                        }                        
+                    }
                 }
                 $x++;
             }
