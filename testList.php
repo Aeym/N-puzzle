@@ -4,21 +4,47 @@
 * Examples of DoublyLinkedList
 // */
 
-$obj = new SplDoublyLinkedList();
-// Check wither linked list is empty
-if ($obj->isEmpty())
-{
-    echo "Adding nodes to Linked List<br>";
-    $obj->push(2);
-    $obj->push(3);
-    echo "Adding the node at beginning of doubly linked list <br>";
-    $obj->unshift(10);
+class PQtest extends SplPriorityQueue 
+{ 
+    protected $serial = PHP_INT_MIN;
+
+    public function insert($value, $priority) {
+        parent::insert($value, array($priority, $this->serial++));
+    }
+
+    public function compare($priority1, $priority2) 
+    { 
+        if ($priority1 === $priority2) return 0; 
+        return $priority1 < $priority2 ? -1 : 1; 
+    } 
+} 
+
+$obj = new PQtest;
+for ($i = -5; $i <= 0; $i++) {
+    $obj->insert("me" . $i, $i);
 }
-$obj->OffsetSet(2);
-while ($obj->current()["f"] < $child["f"] && $obj->key() < $c) {
-    echo "la";
-    $obj->next();
+print_r($obj);
+$obj->insert("me", -2);
+while(!$obj->isEmpty()) {
+    print_r($obj->extract());
 }
+print_r($obj);
+
+// $obj = new SplDoublyLinkedList();
+// // Check wither linked list is empty
+// if ($obj->isEmpty())
+// {
+//     echo "Adding nodes to Linked List<br>";
+//     $obj->push(2);
+//     $obj->push(3);
+//     echo "Adding the node at beginning of doubly linked list <br>";
+//     $obj->unshift(10);
+// }
+// $obj->OffsetSet(2);
+// while ($obj->current()["f"] < $child["f"] && $obj->key() < $c) {
+//     echo "la";
+//     $obj->next();
+// }
 
 // $obj->add(1, 8);
 

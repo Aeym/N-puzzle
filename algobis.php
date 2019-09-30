@@ -21,7 +21,7 @@
         $node["pos0"] = findZero($grid);
         $node["parent"] = $strParent;
         $node["g"] =  $g + 1;
-        $node["f"] = $node["g"] + $node["h"]; // essayer ici
+        $node["f"] =  $node["h"]; // essayer ici
         // echo "valeur de move : " . $m . "\n";
         $node["move"] = $m;
         return $node;
@@ -89,7 +89,7 @@
             echo "\n";
             $str = json_decode($closedList[$str], TRUE)["parent"];
             $i++;
-            break;
+            // break;
         }
         echo "Number of moves required : " . $i . "\n";
     }
@@ -136,7 +136,7 @@
 
         while (!$openList->isEmpty()) {
             $c = $openList->count();
-            echo "nb elem in openList : " . $c . "\n";
+            // echo "nb elem in openList : " . $c . "\n";
             // echo "nb elem in openListBis : " . count($openListBis) . "\n";
             
             $str = $openList->extract();
@@ -146,6 +146,8 @@
             // echo $str . "\n"; 
             // print_r($openListBis);
             $process = json_decode($openListBis[$str], TRUE);
+            // echo "valeur de f recuperee : " . $process["f"] . "\n";
+            // echo "valeur de g recuperee : " . $process["g"] . "\n";
             if ($process["h"] == 0) {
                 path($process, $closedList);
                 echo "complexity in time : " . count($closedList);
@@ -170,7 +172,7 @@
                     } else {
                         $actualNode = json_decode($openListBis[$tmpStr], TRUE);
                         if ($child["g"] < $actualNode["g"]) {
-                            echo "child g = " . $child['g'] . "\n" . "current de g = " . json_decode($openListBis[$tmpStr], TRUE)["g"] . "\n";;
+                            // echo "child g = " . $child['g'] . "\n" . "current de g = " . json_decode($openListBis[$tmpStr], TRUE)["g"] . "\n";;
                             // $openList = test($openList, $tmpStr);
                             // $openList->setExtractFlags(SplPriorityQueue::EXTR_DATA);
                             $openList->insert($tmpStr, -1 * $child['f']);
