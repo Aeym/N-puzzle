@@ -62,6 +62,17 @@
 			return array_keys($this->background_colors);
 		}
     }
+
+    function disp_color($var) {
+        # blanc et rouge
+        $test = "\033[1;37m\033[41m" . $var . "\033[0m";
+        return($test);
+    }
+    function disp_color2($var) {
+        # noir et light gray
+        $test = "\033[40m\033[0m\033[0;37m" . $var . "\033[0m";
+        return($test);
+    }
     
     function display_solving_steps($process, $closedList, $openlist_size) {
         $str = $process["parent"];
