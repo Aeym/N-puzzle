@@ -65,14 +65,21 @@
     
     function display_solving_steps($process, $closedList, $openlist_size) {
         $str = $process["parent"];
+        $path = array();
         $i = 0;
         $time = count($closedList);
-        echo print_grid($process["grid"], $GLOBALS["nbN"]) . "\n";
+        $path[] = $process["grid"];
+        // echo print_grid($process["grid"], $GLOBALS["nbN"]) . "\n";
         while ($str != "start") {
-            echo print_grid(json_decode($closedList[$str], TRUE)["grid"], $GLOBALS["nbN"]) . "\n";
-            usleep(100000);
+            $path[] = json_decode($closedList[$str], TRUE)["grid"];
             $str = json_decode($closedList[$str], TRUE)["parent"];
             $i++;
+        }
+        $timeSleep = 10000000 / $i;
+        $pathbis = array_reverse($path);
+        foreach ($pathbis as $elem) {
+            echo print_grid($elem, $GLOBALS["nbN"]) . "\n";
+            usleep((int)$timeSleep);
         }
         echo "Number of moves required : " . $i . "\n";
         echo "complexity in time : " . $time . "\n";   
