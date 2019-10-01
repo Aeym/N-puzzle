@@ -70,9 +70,9 @@
     }
 
     function grid_to_str($grid) {
-        $c = count($grid);
         $y = 0;
         $tmp = "";
+        $c = count($grid);
         while ($y < $c) {
             $x = 0;
             while ($x < $c) {
@@ -86,12 +86,11 @@
 
 
     function goal_grid($n) {
-        $nbmax = $n * $n;
-        echo "nbmax = " . $nbmax . "\n";
         $nb = 1;
         $snail = 0;
         $x = 0;
         $y = 0;
+        $nbmax = $n * $n;
         while ($nb < $nbmax) {
             while ($x < ($n - $snail)) {
                 $ret[$y][$x] = $nb;
