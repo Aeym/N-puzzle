@@ -9,6 +9,19 @@
             $x = 0;
             while ($x < $c) {
                 $tmplen = strlen($arr[$y][$x]);
+                if ($arr[$y][$x] == 0) {
+                    echo $str;
+                    if($x == $GLOBALS["nbN"]) {
+                        echo "\n";
+                    }
+                    $tmpZ = $arr[$y][$x];
+                    $tmpZ .= " ";
+                    while ($tmplen < $len) {
+                        $tmpZ .= " ";
+                        $tmplen++;
+                    }
+                    echo "\e[0;30;47m" . $tmpZ . "\e[0m";
+                }
                 $tmpStr = $arr[$y][$x] . " ";
                 while ($tmplen < $len) {
                     $tmpStr .= " ";

@@ -6,6 +6,7 @@
         echo print_grid($process["grid"], $GLOBALS["nbN"]) . "\n";
         while ($str != "start") {
             echo print_grid(json_decode($closedList[$str], TRUE)["grid"], $GLOBALS["nbN"]) . "\n";
+            usleep(100000);
             $str = json_decode($closedList[$str], TRUE)["parent"];
             $i++;
         }
