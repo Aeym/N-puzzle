@@ -11,19 +11,18 @@
             while ($x < $c) {
                 $tmplen = strlen($arr[$y][$x]);
                 if ($arr[$y][$x] == 0) {
-                    echo $str;
+                    #echo $colors->getColoredString($str, "black", "light_gray");
+                  #  echo disp_color2($str);
                     $str = "";
                     $tmpZ = $arr[$y][$x];
-                    echo $colors->getColoredString($tmpZ, "white", "red");
-                    $str .= " ";
+                    $tmpZ .= " ";
                     while ($tmplen < $len) {
-                        $str .= " ";
+                        $tmpZ .= " ";
                         $tmplen++;
                     }
-                    if($x == ($GLOBALS["nbN"] - 1)) {
-                        $str = "";
-                        echo "\n";
-                    }
+                    #echo $colors->getColoredString($tmpZ, "white", "red");
+                    echo disp_color($str);
+                    
                 }
                 else {
                     $tmpStr = $arr[$y][$x] . " ";
@@ -36,9 +35,13 @@
                 $x++;
             }
             $y++;
-            $str .=  "\n";
+            echo disp_color2($str);
+            #echo $colors->getColoredString($str, "black", "light_gray");
+            echo  "\n";
+            $str = "";
         }
-        echo $str;
+        //echo $colors->getColoredString($str, "black", "light_gray");
+        //echo $str;
     }
 
     function find_zero($grid) {
