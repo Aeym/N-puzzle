@@ -75,7 +75,11 @@
             $str = json_decode($closedList[$str], TRUE)["parent"];
             $i++;
         }
-        $timeSleep = 10000000 / $i;
+        if($i < 50) {
+            $timeSleep = 10000000 / (2 * $i);
+        } else {
+            $timeSleep = 10000000 / $i;
+        }
         $pathbis = array_reverse($path);
         foreach ($pathbis as $elem) {
             echo print_grid($elem, $GLOBALS["nbN"]) . "\n";
