@@ -1,6 +1,7 @@
 <?php
 
     function print_grid($arr, $n) {
+        $colors = new Colors();
         $len = strlen((string)($n * $n - 1));
         $y = 0;
         $c = count($arr);
@@ -11,23 +12,27 @@
                 $tmplen = strlen($arr[$y][$x]);
                 if ($arr[$y][$x] == 0) {
                     echo $str;
-                    if($x == $GLOBALS["nbN"]) {
-                        echo "\n";
-                    }
+                    $str = "";
                     $tmpZ = $arr[$y][$x];
-                    $tmpZ .= " ";
+                    echo $colors->getColoredString($tmpZ, "white", "red");
+                    $str .= " ";
                     while ($tmplen < $len) {
-                        $tmpZ .= " ";
+                        $str .= " ";
                         $tmplen++;
                     }
-                    echo "\e[0;30;47m" . $tmpZ . "\e[0m";
+                    if($x == ($GLOBALS["nbN"] - 1)) {
+                        $str = "";
+                        echo "\n";
+                    }
                 }
-                $tmpStr = $arr[$y][$x] . " ";
-                while ($tmplen < $len) {
-                    $tmpStr .= " ";
-                    $tmplen++;
+                else {
+                    $tmpStr = $arr[$y][$x] . " ";
+                    while ($tmplen < $len) {
+                        $tmpStr .= " ";
+                        $tmplen++;
+                    }
+                    $str .= $tmpStr;
                 }
-                $str .= $tmpStr;
                 $x++;
             }
             $y++;
