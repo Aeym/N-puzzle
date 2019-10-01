@@ -2,12 +2,16 @@
 
     function createNode($grid, $strParent, $g, $m) {
         $node["grid"] = $grid;
-        $node["h"] = find_heuristic($grid, $GLOBALS["chose"]);
-      //  echo "valeur de h : " . $node["h"] . "\n";
+        $node["h"] = find_heuristic($grid, $GLOBALS["chose"]);     
         $node["pos0"] = find_zero($grid);
         $node["parent"] = $strParent;
         $node["g"] =  $g + 1;
-        $node["f"] =  $node["h"];
+        if ($GLOBALS["search"] == 1) {
+            $node["f"] =  $node["g"] + $node["h"];
+        }
+        else {
+            $node["f"] =  $node["h"];
+        }
         $node["move"] = $m;
         return $node;
     }

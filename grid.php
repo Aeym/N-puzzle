@@ -1,10 +1,11 @@
 <?php
 
-    function print_grid($arr, $n) {    
+    function print_grid($arr, $n) {
         $len = strlen((string)($n * $n - 1));
         $y = 0;
         $c = count($arr);
         $str = "";
+        echo chr(27).chr(91).'H'.chr(27).chr(91).'J';
         while ($y < $c) {
             $x = 0;
             while ($x < $c) {
