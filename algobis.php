@@ -21,7 +21,7 @@
         $node["pos0"] = findZero($grid);
         $node["parent"] = $strParent;
         $node["g"] =  $g + 1;
-        $node["f"] =  $node["h"]; // essayer ici
+        $node["f"] =  $node["h"]; // + $node["g"]
         // echo "valeur de move : " . $m . "\n";
         $node["move"] = $m;
         return $node;

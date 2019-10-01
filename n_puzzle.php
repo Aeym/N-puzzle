@@ -1,5 +1,5 @@
 <?php
-    // ini_set('memory_limit', '2048M'); // or you could use 1G
+    ini_set('memory_limit', '2048M'); // or you could use 1G
 
 
     require_once("./testbis.php");
