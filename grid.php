@@ -1,15 +1,6 @@
 <?php
 
-    $openSet = [];
-    $closedSet = [];
-    $goalGrid = [];
-
-    // goalGrid($argv[1]);
-    // print_r($GLOBALS);
-    // printGrid($grid, $argv[1]);
-    // echo "\n";
-    // echo gridToStr($grid);
-    function printGrid($arr, $n) {
+    function print_grid($arr, $n) {
         $len = strlen((string)($n * $n - 1));
         $y = 0;
         $c = count($arr);
@@ -32,8 +23,22 @@
         echo $str;
     }
 
+    function find_zero($grid) {
+        $y = 0;
+        while ($y < $GLOBALS["nbN"]) {
+            $x = 0;
+            while ($x < $GLOBALS["nbN"]) {
+                if ($grid[$y][$x] == 0) {
+                    return array("x0" => $x, "y0" => $y);
+                }
+                $x++;
+            }
+            $y++;
+        }
+        return 0;
+    }
 
-    function gridToStr($grid) {
+    function grid_to_str($grid) {
         $c = count($grid);
         $y = 0;
         $tmp = "";
@@ -49,7 +54,7 @@
     }
 
 
-    function goalGrid($n) {
+    function goal_grid($n) {
         $nbmax = $n * $n;
         echo "nbmax = " . $nbmax . "\n";
         $nb = 1;
@@ -94,7 +99,7 @@
                 $ret[$y][$x] = 0;
             }
         }
-        $GLOBALS["strGoal"] = gridToStr($ret);
+        $GLOBALS["strGoal"] = grid_to_str($ret);
         $GLOBALS["gridGoal"] = $ret;
         // return $ret;
     }
