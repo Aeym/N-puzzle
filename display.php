@@ -17,6 +17,32 @@
         }
     }
 
+    function ask_user() {
+        echo "\n\n\t\tChose one of the following search method by typing it's associated number (1 or 2)\n\n";
+        echo "\t\t[1] - Uniform cost\n";   
+        echo "\t\t[2] - Greedy search\n\n\n";
+        $clear = chr(27).chr(91).'H'.chr(27).chr(91).'J';
+        $search = fgets(STDIN);
+        echo $clear;
+        if ($search != 1 && $search != 2) {
+            echo "Please provide a number between 1 and 2.\n";
+            exit(1);
+        }
+        echo "\n\n\t\tChose one of the following heurisitcs by typing it's associated number\n\n";
+        echo "\t\t[1] - Manhattan" . "\n";
+        echo "\t\t[2] - Euclidean" . "\n";
+        echo "\t\t[3] - Hamming" . "\n";
+        echo "\t\t[4] - Linear conflict" . "\n";
+        $h = fgets(STDIN);
+        if ($h != 1 && $h != 2 && $h != 3 && $h != 4) {
+            echo "Please provide a number between 1 and 4.\n";
+            exit(1);
+        }
+        echo $clear;
+        $GLOBALS["chose"] = $h;
+        $GLOBALS["search"] = $search;
+    }
+
     function display_solving_steps($process, $closedList, $openlist_size) {
         $str = $process["parent"];
         $path = array();
