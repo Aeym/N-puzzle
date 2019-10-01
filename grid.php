@@ -1,7 +1,6 @@
 <?php
 
-    function print_grid($arr, $n) {
-        $colors = new Colors();
+    function print_grid($arr, $n) {    
         $len = strlen((string)($n * $n - 1));
         $y = 0;
         $c = count($arr);
@@ -11,37 +10,48 @@
             while ($x < $c) {
                 $tmplen = strlen($arr[$y][$x]);
                 if ($arr[$y][$x] == 0) {
-                    #echo $colors->getColoredString($str, "black", "light_gray");
-                  #  echo disp_color2($str);
-                    $str = "";
-                    $tmpZ = $arr[$y][$x];
-                    $tmpZ .= " ";
-                    while ($tmplen < $len) {
+                    echo disp_color($str, 2);
+                        $str = "";
+                        $tmpZ = $arr[$y][$x];
                         $tmpZ .= " ";
-                        $tmplen++;
+                        while ($tmplen < $len) {
+                            $tmpZ .= " ";
+                            $tmplen++;
+                        }
+                    if ($arr[$y][$x] != $GLOBALS["gridGoal"][$y][$x]) {
+                        echo disp_color($tmpZ, 1);
+                    } else {
+                        echo disp_color($tmpZ, 3);
                     }
-                    #echo $colors->getColoredString($tmpZ, "white", "red");
-                    echo disp_color($str);
-                    
                 }
                 else {
-                    $tmpStr = $arr[$y][$x] . " ";
-                    while ($tmplen < $len) {
-                        $tmpStr .= " ";
-                        $tmplen++;
+                    if ($arr[$y][$x] == $GLOBALS["gridGoal"][$y][$x]) {
+                        echo disp_color($str, 2);
+                        $str = "";
+                        $tmpZ = $arr[$y][$x];
+                        $tmpZ .= " ";
+                        while ($tmplen < $len) {
+                            $tmpZ .= " ";
+                            $tmplen++;
+                        }
+                        echo disp_color($tmpZ, 3);
                     }
-                    $str .= $tmpStr;
+                    else {
+                        $tmpStr = $arr[$y][$x] . " ";
+                        while ($tmplen < $len) {
+                            $tmpStr .= " ";
+                            $tmplen++;
+                        }
+                        $str .= $tmpStr;
+                    }       
                 }
                 $x++;
             }
             $y++;
-            echo disp_color2($str);
-            #echo $colors->getColoredString($str, "black", "light_gray");
+            echo disp_color($str, 2);
             echo  "\n";
             $str = "";
         }
-        //echo $colors->getColoredString($str, "black", "light_gray");
-        //echo $str;
     }
 
     function find_zero($grid) {
@@ -60,9 +70,9 @@
     }
 
     function grid_to_str($grid) {
-        $c = count($grid);
         $y = 0;
         $tmp = "";
+        $c = count($grid);
         while ($y < $c) {
             $x = 0;
             while ($x < $c) {
@@ -76,12 +86,11 @@
 
 
     function goal_grid($n) {
-        $nbmax = $n * $n;
-        echo "nbmax = " . $nbmax . "\n";
         $nb = 1;
         $snail = 0;
         $x = 0;
         $y = 0;
+        $nbmax = $n * $n;
         while ($nb < $nbmax) {
             while ($x < ($n - $snail)) {
                 $ret[$y][$x] = $nb;
