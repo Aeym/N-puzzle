@@ -1,18 +1,20 @@
 <?php
 
     function solvable($grid) {
-        $str = grid_to_str($grid);
-        $goalStr = grid_to_str($GLOBALS["gridGoal"]);
-        $invCount = inversion_count($str, $goalStr);
+        // $str = grid_to_str($grid);
+        // $goalStr = grid_to_str($GLOBALS["gridGoal"]);
+        $invCount = inversion_count($grid, $GLOBALS["gridGoal"]);
+        echo "inversion nb = " . $invCount . "\n";
         if (($GLOBALS["nbN"] % 2) == 0) {
-            $tmpZ = find_zero($grid);
-            $goalZ = find_zero($GLOBALS["gridGoal"]);
-            $tmpM = manhattan($tmpZ['x0'], $tmpZ['y0'], $goalZ['x0'], $goalZ['y0']);
-            $posZ = abs($tmpZ['y0'] - $goalZ['y0']) + 1;
+            // $tmpZ = find_zero($grid);
+            // $goalZ = find_zero($GLOBALS["gridGoal"]);
+            // $tmpM = manhattan($tmpZ['x0'], $tmpZ['y0'], $goalZ['x0'], $goalZ['y0']);
+            $tmp = find_heuristic($grid);
+            // $posZ = abs($tmpZ['y0'] - $goalZ['y0']) + 1;
             // TRAITER LES CHIFFRES DU GOAL STATE COMME CEUX DU STANDARD STATE
             // echo "posZ : " . $posZ . "\n";
             // echo "Inv : " . $invCount . "\n";
-            if ($posZ % 2 == 0 && $invCount % 2 != 0 || $posZ % 2 != 0 && $invCount % 2 == 0) {
+            if ($tmp % 2 == 0 && $invCount % 2 == 0 || $tmp % 2 != 0 && $invCount % 2 != 0) {
                 return 2;
             }
         } else {
@@ -24,21 +26,43 @@
     }
 
     
-    function inversion_count($str, $goalStr) {
+    function inversion_count($grid, $goalGrid) {
+        $n = $GLOBALS["nbN"];
+        $y = 0;
         $inv = 0;
-        $i = 0;
-        $len = strlen($str);
-        while ($i < $len) {
-            $tmpI = $i + 1;
-            while ($tmpI < $len) {
-                if (strpos($goalStr, $str[$i]) > strpos($goalStr, $str[$tmpI])) {
-                    $inv++;
+        while ($y < $n) {
+            $x = 0;
+            while ($x < $n) {
+                $ybis = $y;
+                $tmp = 0;
+                while ($ybis < $n) {
+                    if ($tmp != 0) {
+                        $xbis = 0;
+                    } else {
+                        $xbis = $x + 1;
+                        $tmp = 1;
+                    }
+                    while ($xbis < $n) {
+                        $goalT = findInGoal($grid[$y][$x]);
+                        $goalTbis = findInGoal($grid[$ybis][$xbis]);
+                        // echo $grid[$y][$x] . "\n";
+                        // echo $grid[$ybis][$xbis] . "\n";
+                        // $grid[$y][$x];/
+                        $u1 = $goalT['x'] + $n * $goalT['y'];
+                        $u2 = $goalTbis['x'] + $n * $goalTbis['y'];
+                        if ($u1 > $u2) {
+                            $inv++;
+                        }
+                        $xbis++;
+                    }
+                    $ybis++;
                 }
-                $tmpI++;
+                $x++;
             }
-            $i++;
+            $y++;
         }
         return $inv;
+        // x + N * y;
     }
 
     // function inversion_count($str) {
