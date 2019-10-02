@@ -12,6 +12,7 @@
                 return 0;
             }
         }
+        echo "Error: puzzle is not solvable\n";
         return 1;
     }
 

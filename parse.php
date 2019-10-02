@@ -15,12 +15,15 @@
             $coordinates[] = preg_split('/\s/', $fileArr[$i], -1, PREG_SPLIT_NO_EMPTY);      
         }
         for ($i = 0, $len = count($coordinates); $i < $len; $i++) {
-            for ($n = 0, $j=count($coordinates[$i]); $n < $j; $n++) {
+            for ($n = 0, $j = count($coordinates[$i]); $n < $j; $n++) {
                 $nbvalues++;
             }
         }
+        if (check_numbers($coordinates) != 0) {
+            return 1;
+        }
         if ($total != $nbvalues) {
-            print("Number missing\n");
+            print("Error: number missing in puzzle\n");
             return 1;
         }
         else {
@@ -28,6 +31,29 @@
         }
     }
     
+    function check_numbers($coordinates) {
+        $x = 0;
+        $total = $GLOBALS["nbN"] * $GLOBALS["nbN"];
+        while ($x < $GLOBALS["nbN"]){
+            $y = 0;
+            while ($y < $GLOBALS["nbN"]){
+                if ($coordinates[$x][$y] >= $total || $coordinates[$x][$y] < 0)
+                {
+                    echo "Error: a number is not allowed in the puzzle.\n";
+                    return 1;
+                }
+                if (!ctype_digit($coordinates[$x][$y]))
+                {
+                    echo "Error: invalid character in puzzle.\n";
+                    return 1;
+                }
+                $y++;
+            }
+            $x++;
+        }
+        return 0;
+    }
+
     function isFileEmpty($arr) {
         clearstatcache();
         if(filesize($arr)) {
