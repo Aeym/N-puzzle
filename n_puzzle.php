@@ -20,9 +20,12 @@
         if (($coordinates = parse_file($argv[1])) != 1) {
             ask_user();
             $start = createNode($coordinates, "start", -1, 'c');
-            echo solvable($start["grid"]);
-            echo "\n";
-            // a_star_algorithm($start);
+            if ($err = solvable($start["grid"]) != 1) {
+                a_star_algorithm($start);
+            }
+            else {
+                return 1;
+            }
         }
         else {
             return 1;
