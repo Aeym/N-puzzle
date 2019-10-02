@@ -2,15 +2,9 @@
 
     function solvable($grid) {
         $invCount = inversion_count($grid, $GLOBALS["gridGoal"]);
-        if (($GLOBALS["nbN"] % 2) == 0) {
-            $tmp = manhattan_state($grid);           
-            if ($tmp % 2 == 0 && $invCount % 2 == 0 || $tmp % 2 != 0 && $invCount % 2 != 0) {
-                return 0;
-            }
-        } else {
-            if (($invCount % 2) == 0) {
-                return 0;
-            }
+        $tmp = manhattan_state($grid);           
+        if ($tmp % 2 == 0 && $invCount % 2 == 0 || $tmp % 2 != 0 && $invCount % 2 != 0) {
+            return 0;
         }
         echo "Error: puzzle is not solvable\n";
         return 1;
