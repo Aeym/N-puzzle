@@ -34,3 +34,9 @@ FONCTIONS :
 - heuristic manhattan DONE
 - fonction qui trouve l'index du chiffre X dans le goal state et le actual state (pour envoi aux heuristics) DONE
 - fonction qui cree les nodes enfants 
+
+
+- memoire a check
+- virer les echos, mettre au propre le code
+- forcer manhattan pour le calcul inversion
+- ?? generator maison ??
