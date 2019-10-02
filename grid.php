@@ -5,20 +5,24 @@
         $y = 0;
         $c = count($arr);
         $str = "";
-        echo chr(27).chr(91).'H'.chr(27).chr(91).'J';
+        if ($GLOBALS["visu"] == 1){
+            echo chr(27).chr(91).'H'.chr(27).chr(91).'J';
+        }
+        echo "\n\n";
         while ($y < $c) {
+            echo "\t";
             $x = 0;
             while ($x < $c) {
                 $tmplen = strlen($arr[$y][$x]);
                 if ($arr[$y][$x] == 0) {
                     echo disp_color($str, 2);
-                        $str = "";
-                        $tmpZ = $arr[$y][$x];
+                    $str = "";
+                    $tmpZ = $arr[$y][$x];
+                    $tmpZ .= " ";
+                    while ($tmplen < $len) {
                         $tmpZ .= " ";
-                        while ($tmplen < $len) {
-                            $tmpZ .= " ";
-                            $tmplen++;
-                        }
+                        $tmplen++;
+                    }
                     if ($arr[$y][$x] != $GLOBALS["gridGoal"][$y][$x]) {
                         echo disp_color($tmpZ, 1);
                     } else {
@@ -85,7 +89,6 @@
         return $tmp;
     }
 
-
     function goal_grid($n) {
         $nb = 1;
         $snail = 0;
@@ -132,7 +135,6 @@
         }
         $GLOBALS["strGoal"] = grid_to_str($ret);
         $GLOBALS["gridGoal"] = $ret;
-        // return $ret;
     }
 
 ?>

@@ -25,22 +25,33 @@
         $search = fgets(STDIN);
         echo $clear;
         if ($search != 1 && $search != 2) {
-            echo "Please provide a number between 1 and 2.\n";
-            exit(1);
+            echo "Please provide a number, either 1 or 2 \n";
+            return 1;
         }
         echo "\n\n\t\tChose one of the following heurisitcs by typing it's associated number\n\n";
-        echo "\t\t[1] - Manhattan" . "\n";
-        echo "\t\t[2] - Euclidean" . "\n";
-        echo "\t\t[3] - Hamming" . "\n";
-        echo "\t\t[4] - Linear conflict" . "\n";
+        echo "\t\t[1] - Manhattan\n";
+        echo "\t\t[2] - Euclidean\n";
+        echo "\t\t[3] - Hamming\n";
+        echo "\t\t[4] - Linear conflict\n";
         $h = fgets(STDIN);
+        echo $clear;
         if ($h != 1 && $h != 2 && $h != 3 && $h != 4) {
             echo "Please provide a number between 1 and 4.\n";
-            exit(1);
+            return 1;
         }
+        echo "\n\n\t\t Do you want to unable visualisation ?\n\n";
+        echo"\t\t[1] - Yes\n";
+        echo "\t\t[2] - No\n";
+        $visu = fgets(STDIN);
         echo $clear;
+        if ($visu != 1 && $visu != 2) {
+            echo "Please provide a number, either 1 or 2.\n";
+            return 1;
+        }
         $GLOBALS["chose"] = $h;
         $GLOBALS["search"] = $search;
+        $GLOBALS["visu"] = $visu;
+        return 0;
     }
 
     function display_solving_steps($process, $closedList, $openlist_size) {

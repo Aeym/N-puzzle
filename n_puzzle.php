@@ -10,32 +10,27 @@
 
 
     if (!file_exists($argv[1])) {
-        echo "File doesn't exist\n";
+        echo "Error: file doesn't exist\n";
         return 1;
     }
     else if (!preg_match("/.txt/", $argv[1])) {
-        echo "Wrong file extension\n";
+        echo "Error: wrong file extension\n";
         return 1;
     }
     else if (!isFileEmpty($argv[1])) {
         if (($coordinates = parse_file($argv[1])) != 1) {
-            // echo "memory limit = " . ;
-        //     $GLOBALS["mem_limit"] = intval(ini_get('memory_limit')) * 1048576;
-        //     // echo 'Memory limit:' . $GLOBALS["mem_limit"] . "\n";
-            
-        //     ask_user();
-        //     $start = createNode($coordinates, "start", -1, 'c');
-        //     // echo solvable($start["grid"]);
-        //     // echo "\n";
-        //     a_star_algorithm($start);
-            generateGrid($GLOBALS["nbN"], 100);
+            if (ask_user() != 1) {
+                $start = createNode($coordinates, "start", -1, 'c');
+                if (solvable($start["grid"]) != 1) {
+                    a_star_algorithm($start);
+                    return 0;
+                }
+            }
         }
-        else {
-            return 1;
-        }
+        return 1;
     }
     else {
-        echo "File is empty\n";
+        echo "Error: empty file\n";
         return 1;
     }
 

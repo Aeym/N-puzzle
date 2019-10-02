@@ -1,5 +1,4 @@
 <?php
-
     function find_heuristic($grid) {
         $y = 0;
         $total = 0;
@@ -9,7 +8,6 @@
             while ($x < $GLOBALS["nbN"]) {
                 if ($grid[$y][$x] != 0) {
                     $tmp = findInGoal($grid[$y][$x]);
-                    // print_r($tmp);
                     if ($GLOBALS["chose"] == 1){ 
                         $total += manhattan($tmp['x'], $tmp['y'], $x, $y);
                     }
@@ -22,7 +20,6 @@
                         }                        
                     }
                     if ($GLOBALS["chose"] == 4) {
-                        // echo "test\n";
                         $total += manhattan($tmp['x'], $tmp['y'], $x, $y);
                         $conflict += conflicts($grid, $y, $x, $tmp);
                     }
@@ -38,27 +35,31 @@
         }
     }
 
-    function conflicts($grid, $yT, $xT, $cGoal) {
-        // $gG = $GLOBALS["goalGrid"];
-        // echo "test4\n";
+    function manhattan_state($grid) {
+        $y = 0;
+        $total = 0;
+        while ($y < $GLOBALS["nbN"]) {
+            $x = 0;
+            while ($x < $GLOBALS["nbN"]) {
+                if ($grid[$y][$x] != 0) {
+                    $tmp = findInGoal($grid[$y][$x]);                    
+                    $total += manhattan($tmp['x'], $tmp['y'], $x, $y);                                                           
+                }
+                $x++;
+            }
+            $y++;
+        }
+        return($total);
+    }
+
+    function conflicts($grid, $yT, $xT, $cGoal) {       
         $conf = 0;
         $x = 0;
-        // if ($yT != 0) {
-        //     // echo "test5\n";
-        //     return 0;
-        // }
         while ($x < $GLOBALS["nbN"]) {
             if ($x != $xT) {
-                $tmpC = findInGoal($grid[$yT][$x]);
-                // echo "A : " . $grid[$yT][$xT] . "\n";
-                // echo "B : " . $grid[$yT][$x] . "\n";
-                // echo "ygoalB : " . $tmpC["y"] . "\n";
-                // echo "ygoalA : " . $cGoal["y"] . "\n";
-                if ($tmpC["y"] == $cGoal["y"]) {
-                    // echo "testbis\n"; // les deux tuiles sont dans la même ligne dans goalState ?
+                $tmpC = findInGoal($grid[$yT][$x]);                
+                if ($tmpC["y"] == $cGoal["y"]) {                    
                     if ($xT < $x && $cGoal['x'] > $tmpC['x'] || $xT > $x && $cGoal['x'] < $tmpC['x']) {
-                        // echo "test3\n";
-                        // // echo $grid[$yT][$xT] . "\n";
                         $conf++;
                     }
                 }
@@ -77,7 +78,6 @@
             }
             $y++;
         }
-        // echo "conf : " . $conf . "\n";
         return $conf;
 
     }
