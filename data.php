@@ -2,7 +2,7 @@
 
     function createNode($grid, $strParent, $g, $m) {
         $node["grid"] = $grid;
-        $node["h"] = find_heuristic($grid, $GLOBALS["chose"]);     
+        $node["h"] = find_heuristic($grid);     
         $node["pos0"] = find_zero($grid);
         $node["parent"] = $strParent;
         $node["g"] =  $g + 1;

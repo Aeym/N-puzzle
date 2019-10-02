@@ -33,8 +33,7 @@
         $openListBis[$str_key] = json_encode($startNode);
         $closedList = [];
         while (!$openList->isEmpty()) {
-            $mem_used = memory_get_usage();
-            echo $mem_used . "\n";
+            $mem_used = memory_get_usage();           
             if ($mem_used > ($GLOBALS["mem_limit"] - 1048576 * 100)) {
                echo "Memory usage is about to go beyond memory limit.\n";
                return;
@@ -43,8 +42,11 @@
             while (!array_key_exists($key, $openListBis) && !$openList->isEmpty()) {
                 $key = $openList->extract();
             }         
-            $process = json_decode($openListBis[$key], TRUE);           
-            if ($process["h"] == 0) {
+            if (!array_key_exists($key, $openListBis)) {
+                break ;
+            }
+            $process = json_decode($openListBis[$key], TRUE);
+            if ($process["h"] == 0) {              
                 return(display_solving_steps($process, $closedList, $openList->count()));
             }
             unset($openListBis[$key]);
