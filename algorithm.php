@@ -32,7 +32,13 @@
         $openList->insert($str_key, -1 * $startNode['f']);
         $openListBis[$str_key] = json_encode($startNode);
         $closedList = [];
-        while (!$openList->isEmpty()) {     
+        while (!$openList->isEmpty()) {
+            $mem_used = memory_get_usage();
+            // echo $mem_used . "\n";
+            if ($mem_used > ($GLOBALS["mem_limit"] - 1048576 * 10)) {
+                echo "Memory usage is about to go beyond memory limit.\n";
+                return;
+            }
             $key = $openList->extract();
             while (!array_key_exists($key, $openListBis)) {
                 $key = $openList->extract();

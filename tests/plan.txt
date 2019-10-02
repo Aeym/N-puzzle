@@ -36,7 +36,7 @@ FONCTIONS :
 - fonction qui cree les nodes enfants 
 
 
-- memoire a check
+- memoire a check done
 - virer les echos, mettre au propre le code
-- forcer manhattan pour le calcul inversion
-- ?? generator maison ??
+- forcer manhattan pour le calcul inversion done
+- ?? generator maison ?? done
