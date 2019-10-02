@@ -34,13 +34,13 @@
         $closedList = [];
         while (!$openList->isEmpty()) {
             $mem_used = memory_get_usage();
-            // echo $mem_used . "\n";
-            if ($mem_used > ($GLOBALS["mem_limit"] - 1048576 * 10)) {
-                echo "Memory usage is about to go beyond memory limit.\n";
-                return;
+            echo $mem_used . "\n";
+            if ($mem_used > ($GLOBALS["mem_limit"] - 1048576 * 100)) {
+               echo "Memory usage is about to go beyond memory limit.\n";
+               return;
             }
             $key = $openList->extract();
-            while (!array_key_exists($key, $openListBis)) {
+            while (!array_key_exists($key, $openListBis) && !$openList->isEmpty()) {
                 $key = $openList->extract();
             }         
             $process = json_decode($openListBis[$key], TRUE);           

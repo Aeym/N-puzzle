@@ -17,8 +17,17 @@
         }
     }
 
-    function ask_user() {
-        echo "\n\n\t\tChose one of the following search method by typing it's associated number (1 or 2)\n\n";
+    function ask_user($i) {
+        if ($i == 1) {
+            echo "\n\n\tEnter a size N > 2\n";
+            $size = fgets(STDIN);
+            $GLOBALS["nbN"] = $size;
+            goal_grid($size);            
+            $GLOBALS["size"] = $size;           
+            $GLOBALS["customgrid"] = generateGrid($size);
+
+        }
+        echo "\n\n\t\tChoose one of the following search method by typing it's associated number (1 or 2)\n\n";
         echo "\t\t[1] - Uniform cost\n";   
         echo "\t\t[2] - Greedy search\n\n\n";
         $clear = chr(27).chr(91).'H'.chr(27).chr(91).'J';
@@ -28,7 +37,7 @@
             echo "Please provide a number, either 1 or 2 \n";
             return 1;
         }
-        echo "\n\n\t\tChose one of the following heurisitcs by typing it's associated number\n\n";
+        echo "\n\n\t\tChoose one of the following heurisitcs by typing it's associated number\n\n";
         echo "\t\t[1] - Manhattan\n";
         echo "\t\t[2] - Euclidean\n";
         echo "\t\t[3] - Hamming\n";
