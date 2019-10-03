@@ -26,6 +26,7 @@
         else if (!isFileEmpty($argv[1])) {
             if (($coordinates = parse_file($argv[1])) != 1) {
                 if (ask_user(0) != 1) {
+                    $GLOBALS["clear"] = 1;
                     $start = createNode($coordinates, "start", -1, 'c');
                     if (solvable($start["grid"]) != 1) {
                         a_star_algorithm($start);

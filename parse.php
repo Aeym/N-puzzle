@@ -6,6 +6,10 @@
         $fileArr = file($argv);
         delComms($fileArr);
         $total = $fileArr[0];
+        if (!(preg_match('/^[0-9]*$/', $total))) {
+            echo "Error: invalid puzzle size\n";
+            return 1;
+        }
         $GLOBALS["nbN"] = $total;
         goal_grid($GLOBALS["nbN"]);
         $total *= $total;

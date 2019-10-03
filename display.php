@@ -20,7 +20,7 @@
     function ask_user($i) {
         $clear = chr(27).chr(91).'H'.chr(27).chr(91).'J';
         if ($i == 1) {
-            echo "\n\n\tEnter puzzle size (size must be greater than 2)\n";
+            echo "\n\n\tEnter puzzle size (size must be greater than 2 and lower than 30)\n";
             $size = fgets(STDIN);
             echo $clear;
             if ($size < 3) {
