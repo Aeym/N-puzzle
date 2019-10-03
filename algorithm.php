@@ -36,6 +36,7 @@
             $mem_used = memory_get_usage();           
             if ($mem_used > ($GLOBALS["mem_limit"] - 1048576 * 100)) {
                echo "Memory usage is about to go beyond memory limit.\n";
+               echo "Number of nodes in memory : " . count($closedList) + count($openListBis) . "\n";
                return;
             }
             $key = $openList->extract();
