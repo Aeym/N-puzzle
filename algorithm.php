@@ -20,7 +20,7 @@
         $openListBis[$str_key] = json_encode($startNode);
         $closedList = [];
         while (!$openList->isEmpty()) {
-            $mem_used = memory_get_usage();           
+            $mem_used = memory_get_usage(TRUE);           
             if ($mem_used > ($GLOBALS["mem_limit"] - 1048576 * 100)) {
                echo "Memory usage is about to go beyond memory limit.\n";
                $c = count($closedList) + count($openListBis);
