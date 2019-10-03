@@ -5,7 +5,7 @@
         $y = 0;
         $c = count($arr);
         $str = "";
-        if ($GLOBALS["visu"] == 1){
+        if ($GLOBALS["visu"] == 1 && $GLOBALS["clear"] == 1){
             echo chr(27).chr(91).'H'.chr(27).chr(91).'J';
         }
         echo "\n\n";

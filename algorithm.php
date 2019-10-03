@@ -60,6 +60,6 @@
         }
         echo "nb elem :" . count($closedList) . "\n";
         echo "Not possible to reach goal\n";
-        return;
+        return 1;
     }
 ?>

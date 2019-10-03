@@ -10,6 +10,10 @@
 
     $GLOBALS["mem_limit"] = intval(ini_get("memory_limit")) * 1048576;
 
+    if ($argc > 2) {
+        echo "Error: too many arguments.\n";
+        return 1;
+    }
     if (isset($argv[1])) {
         if (!file_exists($argv[1])) {
             echo "Error: file doesn't exist\n";
@@ -36,6 +40,7 @@
         if (ask_user(1) != 1){
             $start = createNode($GLOBALS["customgrid"], "start", -1, 'c');
             while (solvable($start["grid"]) == 1) {
+                $GLOBALS["clear"] = 0;
                 print_grid($start["grid"], $GLOBALS["nbN"]);
                 echo "\nGenerating new grid ...\n";                              
                 sleep(2);
@@ -47,7 +52,8 @@
             print_grid($start["grid"], $GLOBALS["nbN"]);
             echo "\n\t Goal grid\n\t";
             print_grid($GLOBALS["gridGoal"], $GLOBALS["nbN"]);
-            sleep (2);
+            sleep (3);
+            $GLOBALS["clear"] = 1;
             a_star_algorithm($start);
             return 0;
         }
