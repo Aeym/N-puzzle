@@ -35,7 +35,6 @@
     else {
         if (ask_user(1) != 1){
             $start = createNode($GLOBALS["customgrid"], "start", -1, 'c');
-            echo solvable($start["grid"]) . "\n";
             while (solvable($start["grid"]) == 1) {
                 print_grid($start["grid"], $GLOBALS["nbN"]);
                 echo "\nGenerating new grid ...\n";                              

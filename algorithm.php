@@ -1,17 +1,4 @@
 <?php 
-    function checkInOpen($openList, $node) {
-        $foundIt = -1;
-        $openList->rewind();
-        while ($openList->valid()) {
-            if ($openList->current()["grid"] == $node["grid"]) {
-                $foundIt = $openList->key();
-                break;
-            }
-            $openList->next();
-        }
-        return $foundIt;
-    }
-
     class PQtest extends SplPriorityQueue 
     { 
         protected $serial = PHP_INT_MAX;
@@ -36,7 +23,8 @@
             $mem_used = memory_get_usage();           
             if ($mem_used > ($GLOBALS["mem_limit"] - 1048576 * 100)) {
                echo "Memory usage is about to go beyond memory limit.\n";
-               echo "Number of nodes in memory : " . count($closedList) + count($openListBis) . "\n";
+               $c = count($closedList) + count($openListBis);
+               echo "Number of nodes in memory : " . $c . "\n";
                return;
             }
             $key = $openList->extract();
@@ -48,7 +36,7 @@
             }
             $process = json_decode($openListBis[$key], TRUE);
             if ($process["h"] == 0) {              
-                return(display_solving_steps($process, $closedList, $openList->count()));
+                return(display_solving_steps($process, $closedList, count($openListBis)));
             }
             unset($openListBis[$key]);
             $closedList[$key] = json_encode($process);

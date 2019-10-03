@@ -73,7 +73,6 @@
             $path[] = json_decode($closedList[$str], TRUE)["grid"];
             $str = json_decode($closedList[$str], TRUE)["parent"];
             $i++;
-            echo $i;
         }
         if($i <= 50) {
             $timeSleep = 10000000 / (2 * $i);
