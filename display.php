@@ -18,9 +18,20 @@
     }
 
     function ask_user($i) {
+        $clear = chr(27).chr(91).'H'.chr(27).chr(91).'J';
         if ($i == 1) {
-            echo "\n\n\tEnter a size N > 2\n";
+            echo "\n\n\tEnter puzzle size (size must be greater than 2)\n";
             $size = fgets(STDIN);
+            echo $clear;
+            if ($size < 3) {
+                echo "Size must be 3 or above\n";
+                return 1;
+            }
+
+            if ($size > 29) {
+                echo "Error: unreasonable puzzle size.\n";
+                return 1;
+            }
             $GLOBALS["nbN"] = $size;
             goal_grid($size);            
             $GLOBALS["size"] = $size;           
@@ -30,7 +41,6 @@
         echo "\n\n\t\tChoose one of the following search method by typing it's associated number (1 or 2)\n\n";
         echo "\t\t[1] - Uniform cost\n";   
         echo "\t\t[2] - Greedy search\n\n\n";
-        $clear = chr(27).chr(91).'H'.chr(27).chr(91).'J';
         $search = fgets(STDIN);
         echo $clear;
         if ($search != 1 && $search != 2) {
@@ -73,7 +83,6 @@
             $path[] = json_decode($closedList[$str], TRUE)["grid"];
             $str = json_decode($closedList[$str], TRUE)["parent"];
             $i++;
-            echo $i;
         }
         if($i <= 50) {
             $timeSleep = 10000000 / (2 * $i);
